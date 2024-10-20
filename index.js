@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits } = require("discord.js");
+const { Client, GatewayIntentBits, EmbedBuilder } = require("discord.js");
 const config = require("./config.json");
 
 const client = new Client({
@@ -16,9 +16,16 @@ client.on("guildMemberAdd", async (member) => {
         await member.roles.add(role);
         const logChannel = member.guild.channels.cache.get(config.logChannelId);
         if (logChannel) {
-          logChannel.send(
-            `Новый пользователь <@${member.user.id}> вступил в сообщество и ему была присвоена роль <@&${role.id}>.`
-          );
+          const embed = new EmbedBuilder()
+            .setAuthor({
+              name: member.user.tag,
+              iconURL: member.user.displayAvatarURL(),
+            })
+            .setDescription(
+              `<@${member.user.id}> был присвоен роль <@&${role.id}>.`
+            );
+
+          logChannel.send({ embeds: [embed] });
         }
       } catch (error) {}
     }
@@ -29,7 +36,11 @@ client.on("guildMemberRemove", async (member) => {
   if (member.guild.id === config.guildId) {
     const logChannel = member.guild.channels.cache.get(config.logChannelId);
     if (logChannel) {
-      logChannel.send(`Пользователь <@${member.user.id}> покинул сообщество.`);
+      const embed = new EmbedBuilder()
+        .setDescription(`Пользователь <@${member.user.id}> покинул сообщество.`)
+        .setTimestamp();
+      
+      logChannel.send({ embeds: [embed] });
     }
   }
 });
