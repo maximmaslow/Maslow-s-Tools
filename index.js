@@ -17,12 +17,13 @@ client.on("guildMemberAdd", async (member) => {
         const logChannel = member.guild.channels.cache.get(config.logChannelId);
         if (logChannel) {
           const embed = new EmbedBuilder()
+            .setColor("Blue")
             .setAuthor({
               name: member.user.tag,
               iconURL: member.user.displayAvatarURL(),
             })
             .setDescription(
-              `<@${member.user.id}> был присвоен роль <@&${role.id}>.`
+              `Пользователю <@${member.user.id}> была присвоена роль <@&${role.id}>.`
             );
 
           logChannel.send({ embeds: [embed] });
@@ -37,9 +38,15 @@ client.on("guildMemberRemove", async (member) => {
     const logChannel = member.guild.channels.cache.get(config.logChannelId);
     if (logChannel) {
       const embed = new EmbedBuilder()
-        .setDescription(`Пользователь <@${member.user.id}> покинул сообщество.`)
-        .setTimestamp();
-      
+        .setColor("Orange")
+        .setAuthor({
+          name: member.user.tag,
+          iconURL: member.user.displayAvatarURL(),
+        })
+        .setDescription(
+          `Пользователь <@${member.user.id}> покинул сообщество.`
+        );
+
       logChannel.send({ embeds: [embed] });
     }
   }
