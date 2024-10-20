@@ -23,7 +23,7 @@ client.on("guildMemberAdd", async (member) => {
               iconURL: member.user.displayAvatarURL(),
             })
             .setDescription(
-              `**Пользователь <@${member.user.id}> вступил в сообщество и ему была присвоена роль <@&${role.id}>**`
+              `**Пользователь <@${member.user.id}> вступил в сообщество.\и ему была присвоена роль <@&${role.id}>**`
             );
 
           logChannel.send({ embeds: [embed] });
