@@ -23,7 +23,7 @@ client.on("guildMemberAdd", async (member) => {
               iconURL: member.user.displayAvatarURL(),
             })
             .setDescription(
-              `Пользователю <@${member.user.id}> была присвоена роль <@&${role.id}>.`
+              `**Пользователь <@${member.user.id}> вступил в сообщество и ему была присвоена роль <@&${role.id}>**`
             );
 
           logChannel.send({ embeds: [embed] });
@@ -44,7 +44,7 @@ client.on("guildMemberRemove", async (member) => {
           iconURL: member.user.displayAvatarURL(),
         })
         .setDescription(
-          `Пользователь <@${member.user.id}> покинул сообщество.`
+          `**Пользователь <@${member.user.id}> покинул сообщество**`
         );
 
       logChannel.send({ embeds: [embed] });
