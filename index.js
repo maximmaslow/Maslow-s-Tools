@@ -17,7 +17,7 @@ client.on("guildMemberAdd", async (member) => {
         const logChannel = member.guild.channels.cache.get(config.logChannelId);
         if (logChannel) {
           logChannel.send(
-            `New user <@${member.user.id}> joined and was assigned the role "${role.name}".`
+            `Новый пользователь <@${member.user.id}> вступил в сообщество и ему была присвоена роль <@&${role.id}>.`
           );
         }
       } catch (error) {}
@@ -29,9 +29,7 @@ client.on("guildMemberRemove", async (member) => {
   if (member.guild.id === config.guildId) {
     const logChannel = member.guild.channels.cache.get(config.logChannelId);
     if (logChannel) {
-      logChannel.send(
-        `User <@${member.user.id}> (${member.user.tag}) has left the server.`
-      );
+      logChannel.send(`Пользователь <@${member.user.id}> покинул сообщество.`);
     }
   }
 });
